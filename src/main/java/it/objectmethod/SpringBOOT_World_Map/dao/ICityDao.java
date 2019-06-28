@@ -12,9 +12,9 @@ public interface ICityDao {
 
 	public City getCityById(int id);
 
-	public void modCity(String newName, String newPopulation, String newCodNation, String idCity);
+	public void modCity(City city);
 
-	public void addCity(String newName, String newPopulation, String newCodNation);
+	public void addCity(City city);
 
 	public List<City> getCitiesNamebyCountryOrderBy(String codNazione, String ord);
 

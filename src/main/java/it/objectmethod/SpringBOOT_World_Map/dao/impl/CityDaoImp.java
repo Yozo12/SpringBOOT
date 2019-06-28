@@ -55,23 +55,23 @@ public class CityDaoImp extends NamedParameterJdbcDaoSupport implements ICityDao
 	}
 
 	@Override
-	public void modCity(String newName, String newPopulation, String newCodNation, String idCity) {
+	public void modCity(City city) {
 		String sql = "UPDATE city SET city.Name =:parName, city.population=:parPop, city.countryCode =:parCode where city.ID= :id";
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("id", idCity);
-		params.addValue("parName", newName);
-		params.addValue("parPop", newPopulation);
-		params.addValue("parCode", newCodNation);
+		params.addValue("id", city.getId());
+		params.addValue("parName", city.getCityName());
+		params.addValue("parPop", city.getPopulation());
+		params.addValue("parCode", city.getCodNation());
 		getNamedParameterJdbcTemplate().update(sql, params);
 	}
 
 	@Override
-	public void addCity(String newName, String newPopulation, String newCodNation) {
+	public void addCity(City city) {
 		String sql = "INSERT INTO city(Name, population, CountryCode) VALUES ( :parName , :parPop , :parCode)";
 		MapSqlParameterSource params = new MapSqlParameterSource();
-		params.addValue("parName", newName);
-		params.addValue("parPop", newPopulation);
-		params.addValue("parCode", newCodNation);
+		params.addValue("parName", city.getCityName());
+		params.addValue("parPop", city.getPopulation());
+		params.addValue("parCode", city.getCodNation());
 		getNamedParameterJdbcTemplate().update(sql, params);
 	}
 
