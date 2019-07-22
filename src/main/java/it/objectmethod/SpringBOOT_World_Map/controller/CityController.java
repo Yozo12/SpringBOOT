@@ -59,10 +59,10 @@ public class CityController {
 	public ResponseEntity<Integer> modificaAggiungi(@RequestBody City city) {
 		int ret = 0;
 
-		if (city.getId() != "") {
+		if (city.getId() > 0) {
 			ret = cityDaoImp.modCity(city);
 
-		} else if (city.getId() == "") {
+		} else if (city.getId() == 0) {
 			ret = cityDaoImp.addCity(city);
 
 		}

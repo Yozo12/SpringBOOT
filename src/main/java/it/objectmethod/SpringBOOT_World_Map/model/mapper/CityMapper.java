@@ -12,7 +12,7 @@ public class CityMapper implements org.springframework.jdbc.core.RowMapper<City>
 		City city = new City();
 		city.setCityName(rs.getString("Name"));
 		city.setCodNation(rs.getString("CountryCode"));
-		city.setId(rs.getString("ID"));
+		city.setId(rs.getInt("ID"));
 		city.setPopulation(rs.getInt("population"));
 		return city;
 
