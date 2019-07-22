@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 
 import it.objectmethod.SpringBOOT_World_Map.dao.ICityDao;
 import it.objectmethod.SpringBOOT_World_Map.model.City;
-import it.objectmethod.SpringBOOT_World_Map.model.Country;
 import it.objectmethod.SpringBOOT_World_Map.utils.Constants;
 
 @Service
@@ -36,11 +35,11 @@ public class CityDaoImp extends NamedParameterJdbcDaoSupport implements ICityDao
 	}
 
 	@Override
-	public void deleteCity(int id) {
+	public int deleteCity(int id) {
 		String sql = "delete from city where id=:id";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("id", id);
-		getNamedParameterJdbcTemplate().update(sql, params);
+		return getNamedParameterJdbcTemplate().update(sql, params);
 	}
 
 	@Override
@@ -55,24 +54,24 @@ public class CityDaoImp extends NamedParameterJdbcDaoSupport implements ICityDao
 	}
 
 	@Override
-	public void modCity(City city) {
+	public int modCity(City city) {
 		String sql = "UPDATE city SET city.Name =:parName, city.population=:parPop, city.countryCode =:parCode where city.ID= :id";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("id", city.getId());
 		params.addValue("parName", city.getCityName());
 		params.addValue("parPop", city.getPopulation());
 		params.addValue("parCode", city.getCodNation());
-		getNamedParameterJdbcTemplate().update(sql, params);
+		return getNamedParameterJdbcTemplate().update(sql, params);
 	}
 
 	@Override
-	public void addCity(City city) {
+	public int addCity(City city) {
 		String sql = "INSERT INTO city(Name, population, CountryCode) VALUES ( :parName , :parPop , :parCode)";
 		MapSqlParameterSource params = new MapSqlParameterSource();
 		params.addValue("parName", city.getCityName());
 		params.addValue("parPop", city.getPopulation());
 		params.addValue("parCode", city.getCodNation());
-		getNamedParameterJdbcTemplate().update(sql, params);
+		return getNamedParameterJdbcTemplate().update(sql, params);
 	}
 
 	@Override
@@ -101,13 +100,4 @@ public class CityDaoImp extends NamedParameterJdbcDaoSupport implements ICityDao
 		return CityDao;
 	}
 
-	@Override
-	public List<Country> getAllCountries() {
-
-		String sql = "select Code codNation,Name nameNation, Population population,Continent nameContinent from country";
-		List<Country> country = null;
-		BeanPropertyRowMapper<Country> rm = new BeanPropertyRowMapper<Country>(Country.class);
-		country = getNamedParameterJdbcTemplate().query(sql, rm);
-		return country;
-	}
 }

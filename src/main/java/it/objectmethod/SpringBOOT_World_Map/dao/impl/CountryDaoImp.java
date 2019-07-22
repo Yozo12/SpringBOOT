@@ -40,4 +40,13 @@ public class CountryDaoImp extends NamedParameterJdbcDaoSupport implements ICoun
 		return country;
 	}
 
+	@Override
+	public List<Country> getAllCountries() {
+
+		String sql = "select Code codNation,Name nameNation, Population population,Continent nameContinent from country";
+		List<Country> country = null;
+		BeanPropertyRowMapper<Country> rm = new BeanPropertyRowMapper<Country>(Country.class);
+		country = getNamedParameterJdbcTemplate().query(sql, rm);
+		return country;
+	}
 }

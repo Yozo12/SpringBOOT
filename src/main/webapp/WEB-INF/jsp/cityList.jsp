@@ -18,6 +18,7 @@
 			<thead>
 				<tr>
 					<td>CITTA</td>
+					 <a href="/citta-load-edit?id=0">Inserisci</a>
 				</tr>
 			</thead>
 			<tbody>
@@ -34,10 +35,10 @@
 							</form>
 						</tr>
 					</thead>
-
+                  
 					<tbody>
-						<a href="/citta-load-edit?id=0">Inserisci</a>
-						</p>
+						
+						
 						<c:forEach items="${citta}" var="c">
 							<tr>
 								<td>
